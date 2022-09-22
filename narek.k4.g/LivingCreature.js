@@ -1,4 +1,4 @@
-class LivingCreature {constructor(x, y, index) {
+module.exports = class LivingCreature {constructor(x, y, index) {
     this.x = x;
     this.y = y;
     this.index = index;
@@ -16,6 +16,7 @@ class LivingCreature {constructor(x, y, index) {
 
 }
 chooseCell(character) {
+    
     var found = [];
     for (var i in this.directions) {
         var x = this.directions[i][0];

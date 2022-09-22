@@ -1,4 +1,5 @@
-class Men extends LivingCreature {
+let LivingCreature = require("./LivingCreature"); 
+module.exports = class Men extends LivingCreature {
     constructor(x, y, index) {
         super(x,y);
         this.energy = 13;
@@ -7,37 +8,11 @@ class Men extends LivingCreature {
 
 
     }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
+  
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        var emptyCell = super.chooseCell(0);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         if (this.energy >= 15 && newCell) {
             var newMen = new Men(newCell[0], newCell[1], this.index);
             MenArr.push(newMen);
@@ -48,10 +23,14 @@ class Men extends LivingCreature {
     }
     Walking() {
         var walking = [];
-        var newCell = random(this.chooseCell(1));
-        var newCell1 = random(this.chooseCell(0));
+        var emptyCell = super.chooseCell(1);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+
+
+        var emptyCell = super.chooseCell(0);
+        var newCell1 = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         walking.push(newCell, newCell1);
-        var wal = random(walking);
+        var wal = walking[Math.floor(Math.random() * walking.length)];;
 
         if (wal) {
             if (wal == newCell) {
@@ -86,11 +65,14 @@ class Men extends LivingCreature {
 
     eat() {
         var utel = [];
-        var newCell = random(this.chooseCell(4));
-        var newCell1 = random(this.chooseCell(2));
-        var newCell2 = random(this.chooseCell(3));
+        var emptyCell = super.chooseCell(4);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+        var emptyCell = super.chooseCell(2);
+        var newCell1 = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+        var emptyCell = super.chooseCell(3);
+        var newCell2 = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         utel.push(newCell, newCell1, newCell2);
-        var eat = random(utel);
+        var eat = utel[Math.floor(Math.random() * utel.length)];
         if (eat) {
             if (newCell) {
                 var x = newCell[0];

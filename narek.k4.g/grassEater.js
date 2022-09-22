@@ -1,42 +1,16 @@
-class GrassEater extends LivingCreature {
+let LivingCreature = require("./LivingCreature"); 
+module.exports = class GrassEater extends LivingCreature {
     constructor(x, y, index) {
        super(x,y);
         this.energy = 8;
 
         this.index = index;
     }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
-
+    
     move() {
 
-        var newCell = random(this.chooseCell(0));
+        var emptyCell = super.chooseCell(0);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
 
         if (newCell) {
             this.energy--;
@@ -51,7 +25,8 @@ class GrassEater extends LivingCreature {
     }
 
     eat() {
-        var grass = random(this.chooseCell(1));
+        var emptyCell = super.chooseCell(1);
+        var grass = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         if (grass) {
             var x = grass[0];
             var y = grass[1];
@@ -76,7 +51,8 @@ class GrassEater extends LivingCreature {
 
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+         var emptyCell = super.chooseCell(0);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         if (this.energy >= 6 && newCell) {
             var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
             grassEaterArr.push(newGrassEater);
