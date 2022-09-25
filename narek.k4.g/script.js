@@ -316,12 +316,7 @@
 //     [1, 1, 0, 0, 0]
 // ];
 
-var matrix = [];
-var grassArr = [];
-var grassEaterArr = [];
-var PredatorArr = [];
-var MostOfAllArr = [];
-var MenArr = [];
+var socket = io()
 
 var side = 15;
 var n = 55;
@@ -338,31 +333,7 @@ function setup() {
     }
     frameRate(17);
 
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
-                var grass = new Grass(x, y, 1);
-                grassArr.push(grass);
-            }
-            else if (matrix[y][x] == 2) {
-                var grassEater = new GrassEater(x, y, 2);
-                grassEaterArr.push(grassEater);
-            }
-            else if (matrix[y][x] == 3) {
-                var predator = new Predator(x, y, 3);
-                PredatorArr.push(predator)
-            }
-            else if (matrix[y][x] == 4) {
-                var mostOfAll = new MostOfAll(x, y, 4);
-                MostOfAllArr.push(mostOfAll)
-            }
-            else if (matrix[y][x] == 5) {
-                var men = new Men(x, y, 5);
-                MenArr.push(men);
-            }
-
-        }
-    }
+    
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 
@@ -370,7 +341,7 @@ function setup() {
 }
 
 
-function draw() {
+function nkarel(matrix) {
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -400,33 +371,9 @@ function draw() {
 
     }
 
-    for (var i in grassArr) {
-        grassArr[i].mul();
-
-    }
-    for (var i in grassEaterArr) {
-        grassEaterArr[i].mul();
-        grassEaterArr[i].move();
-        grassEaterArr[i].eat();
-        grassEaterArr[i].die();
-    }
-    for (var i in PredatorArr) {
-        PredatorArr[i].mul();
-        PredatorArr[i].move();
-        PredatorArr[i].eat();
-        PredatorArr[i].die();
-    }
-    for (var i in MostOfAllArr) {
-        MostOfAllArr[i].mul();
-        MostOfAllArr[i].move();
-        MostOfAllArr[i].eat();
-        MostOfAllArr[i].die();
-    }
-    for (var i in MenArr) {
-        MenArr[i].mul();
-        MenArr[i].Walking();
-        MenArr[i].eat();
-        MenArr[i].die();
-    }
+    
 }
 
+setInterval(function(){
+   socket.on('send matrix', nkarel)
+},1000)
