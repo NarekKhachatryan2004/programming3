@@ -79,7 +79,8 @@ module.exports = class MostOfAll extends LivingCreature {
 
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        var emptyCell = this.chooseCell(0);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         if (this.energy >= 11 && newCell) {
             var newMostOfAll = new MostOfAll(newCell[0], newCell[1], this.index);
             MostOfAllArr.push(newMostOfAll);
@@ -90,7 +91,8 @@ module.exports = class MostOfAll extends LivingCreature {
     }
     move() {
 
-        var newCell = random(this.chooseCell(0));
+        var emptyCell = this.chooseCell(0);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
 
         if (newCell) {
             this.energy--;
@@ -109,11 +111,14 @@ module.exports = class MostOfAll extends LivingCreature {
     eat() {
         var utel = [];
 
-        var newCell = random(this.chooseCell(2));
-        var newCell1 = random(this.chooseCell(3));
-        var newCell2 = random(this.chooseCell(1));
+        var emptyCell = this.chooseCell(2);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+        var emptyCell = this.chooseCell(3);
+        var newCell1 = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+        var emptyCell = this.chooseCell(1);
+        var newCell2 = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         utel.push(newCell, newCell1, newCell2);
-        var eat = random(utel);
+        var eat = utel[Math.floor(Math.random() * utel.length)];
         if (eat) {
             if (eat == newCell1) {
                 var x = newCell1[0];

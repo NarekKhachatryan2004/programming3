@@ -316,25 +316,17 @@
 //     [1, 1, 0, 0, 0]
 // ];
 
-var socket = io()
+var socket = io();
 
-var side = 15;
-var n = 55;
-var m = 60;
+var side = 19;
+
 
 
 function setup() {
-    for (var y = 0; y < n; y++) {
-        matrix[y] = [];
-        for (x = 0; x < m; x++) {
-            matrix[y][x] = Math.round(random(0.5, 5));
-            console.log(matrix[y][x]);
-        }
-    }
-    frameRate(17);
+
 
     
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(55 * side, 60 * side);
     background('#acacac');
 
 
@@ -376,4 +368,4 @@ function nkarel(matrix) {
 
 setInterval(function(){
    socket.on('send matrix', nkarel)
-},1000)
+},500)

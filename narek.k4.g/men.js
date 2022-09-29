@@ -13,7 +13,7 @@ module.exports = class Men extends LivingCreature {
 
         var emptyCell = super.chooseCell(0);
         var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
-        if (this.energy >= 15 && newCell) {
+        if (this.energy >= 25 && newCell) {
             var newMen = new Men(newCell[0], newCell[1], this.index);
             MenArr.push(newMen);
             matrix[newCell[1]][newCell[0]] = this.index;

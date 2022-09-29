@@ -13,24 +13,41 @@ server.listen(3000, () => {
     console.log("run server");} )
    
     
-var matrix = [];
-var grassArr = [];
-var grassEaterArr = [];
-var PredatorArr = [];
-var MostOfAllArr = [];
-var MenArr = [];
+ grassArr = [];
+ grassEaterArr = [];
+ PredatorArr = [];
+ MostOfAllArr = [];
+ MenArr = [];
 
 
-Grass = require("./Grass");
+Grass = require("./grass");
 GrassEater = require("./grassEater");
 Men = require("./men");
 Predator = require("./predator");
 MostOfAll = require("./MostOfAll");
 
 
+function generator (n,m){
+ let matrix = [];
+
+
+    for (var y = 0; y < n; y++) {
+        matrix[y] = [];
+        for (x = 0; x < m; x++) {
+            matrix[y][x] = Math.floor(Math.random() * 5)+1;
+        }
+    }
+    console.log(matrix);
+   return matrix
+  
+}
+
+matrix = generator(60,55)
+io.sockets.emit('send matrix', matrix);
 
 
 
+function createObject(){
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
@@ -58,9 +75,11 @@ MostOfAll = require("./MostOfAll");
     
     
 
+        
+    }
     io.sockets.emit('send matrix', matrix);
-
 }
+
 function game() {
     for (var i in grassArr) {
         grassArr[i].mul();
@@ -95,5 +114,5 @@ function game() {
 setInterval(game,200);
 
 io.on('connection', function () {
-    createObject(matrix)
+    createObject()
 })

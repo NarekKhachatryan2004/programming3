@@ -5,7 +5,7 @@ let LivingCreature = require("./LivingCreature");
         this.multiply++;
         var emptyCell = super.chooseCell(0);
         var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
-        if (this.multiply >= 5 && newCell) {
+        if (this.multiply >= 8 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);
             matrix[newCell[1]][newCell[0]] = 1;
