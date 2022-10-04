@@ -4,6 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
+
 app.use(express.static("."));
 app.get('/', function(req, res){
     res.redirected('index.html');
@@ -113,6 +114,11 @@ function game() {
 }
 setInterval(game,200);
 
+function weater(){
+io.sockets.emit('send but', weater)
+}
+
 io.on('connection', function () {
     createObject()
+    weater()
 })
