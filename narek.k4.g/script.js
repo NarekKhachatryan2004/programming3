@@ -1,6 +1,6 @@
 
-
 var socket = io();
+
 
 
 var side = 19;
@@ -16,28 +16,30 @@ function setup() {
 
 }
 
-
+socket.on("weather", function (data) {
+    weath = data;
+})
 
 function nkarel(matrix) {
-
+    
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-
-            if (matrix[y][x] == 1) {
-               
-                if (weat == "winter") {
-                   fill("white")
-                }
-                else if (weat == "spring") {
-                    fill("green")
-                }
-                else if (weat == "summer") {
-                    fill("green")
-                }
-                else if (weat == "autumn") {
-                   fill(255,204,0)
-                }
             
+            if (matrix[y][x] == 1) {
+                
+                if (weath == "winter") {
+                    fill("white")
+                }
+                else if (weath == "spring") {
+                    fill("green")
+                }
+                else if (weath == "summer") {
+                    fill("green")
+                }
+                else if (weath == "autumn") {
+                    fill(255,204,0)
+                }
+                
             }
             else if (matrix[y][x] == 0) {
                 fill("#acacac");
@@ -55,6 +57,7 @@ function nkarel(matrix) {
                 fill('#FAEBD7')
             }
             rect(x * side, y * side, side, side);
+            
 
         }
 
@@ -65,21 +68,10 @@ function nkarel(matrix) {
     
 
    socket.on('send matrix', nkarel)
-
+   
 }
-function weater(weat){
-    if(weat = document.getElementById("button1")){
-        weat == "winter"
-    }
-    else if(weat = document.getElementById("button2")){
-        weat == "spring"
-    }
-   else if(weat = document.getElementById("button3")){
-        weat == "summer"
-    }
-   else if(weat = document.getElementById("button4")){
-        weat == "autumn"
-    }
 
-    socket.on('send but',weater);
+function weather() {
+ socket.emit("weather")
 }
+

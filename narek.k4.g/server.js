@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
+weat = "summer";
 
 
 app.use(express.static("."));
@@ -38,7 +38,7 @@ function generator (n,m){
             matrix[y][x] = Math.floor(Math.random() * 5)+1;
         }
     }
-    console.log(matrix);
+   
    return matrix
   
 }
@@ -114,11 +114,38 @@ function game() {
 }
 setInterval(game,200);
 
-function weater(){
-io.sockets.emit('send but', weater)
-}
+
 
 io.on('connection', function () {
     createObject()
-    weater()
+    weather();
+  
 })
+function weather(){
+    if(weat == document.getElementById("button1").onclick) {
+        weat = "winter";
+    } 
+    else if(weat == document.getElementById("button2").onclick){
+        weat = "spring";
+    }
+    else if(weat == document.getElementById("button3").onclick){
+        weat = "summer";
+    }
+    else if(weat == document.getElementById("button4").onclick){
+        weat = "autumn";
+    }
+    io.socket.emit('weather' , weat);
+}
+// var statistics = {};
+
+// setInterval(function() {
+//     statistics.grass = grassArr.length;
+//     statistics.grassEater = grassEaterArr.length;
+//     statistics.predator = PredatorArr.length;
+//     statistics.mostOfAll = MostOfAllArr.length;
+//     statistics.men = MenArr.length;
+
+//     fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+//         console.log("send")
+//     })
+// },1000)
